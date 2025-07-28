@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "tutorial-server": {
+      "command": "python",
+      "args": ["server/server.py"],
+      "env": {}
+    }
+  },
+  "ollama": {
+    "url": "http://localhost:11434",
+    "defaultModel": "llama3.2",
+    "timeout": 30
+  },
+  "client": {
+    "name": "tutorial-mcp-client",
+    "version": "1.0.0"
+  }
+}
