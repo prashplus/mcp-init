@@ -287,3 +287,11 @@ This project is provided as-is for educational purposes. Feel free to modify and
 - [Model Context Protocol Specification](https://modelcontextprotocol.io/introduction)
 - [Ollama Documentation](https://github.com/ollama/ollama)
 - [JSON-RPC 2.0 Specification](https://www.jsonrpc.org/specification)
+
+
+## Authors
+
+* **Prashant Piprotar** - - [Prash+](https://github.com/prashplus)
+
+Visit my blog for more Tech Stuff
+### http://prashplus.blogspot.com
