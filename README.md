@@ -1,5 +1,7 @@
 # MCP (Model Context Protocol) Tutorial
 
+[![CI Tests](https://github.com/prashplus/mcp-init/actions/workflows/test.yml/badge.svg)](https://github.com/prashplus/mcp-init/actions/workflows/test.yml)
+
 A comprehensive tutorial for implementing Model Context Protocol (MCP) servers and clients in Python, with Ollama integration for enhanced AI interactions.
 
 ## Overview
@@ -19,20 +21,22 @@ This project demonstrates how to build MCP servers and clients from scratch in P
 mcp-init/
 ├── README.md                  # This documentation
 ├── requirements.txt           # Python dependencies
+├── setup.py                  # Setup script for easy installation
+├── run_tests.py              # Comprehensive test suite
 ├── config.json               # Configuration example
 ├── start.py                  # Python launcher script
 ├── start.ps1                 # PowerShell launcher script
 ├── test_server.py            # Simple server test script
+├── .gitignore                # Git ignore file
+├── .github/
+│   └── workflows/
+│       └── test.yml          # GitHub Actions CI workflow
 ├── server/
-│   ├── server.py             # MCP Server implementation
-│   ├── package.json          # Node.js package (legacy)
-│   └── index.js             # Node.js server (legacy)
+│   └── server.py             # MCP Server implementation
 └── client/
     ├── client.py             # MCP Client implementation
     ├── ollama_integration.py # Ollama + MCP integration
-    ├── quick_test.py         # Quick integration test
-    ├── package.json          # Node.js package (legacy)
-    └── index.js             # Node.js client (legacy)
+    └── quick_test.py         # Quick integration test
 ```
 
 ### File Descriptions
@@ -59,16 +63,25 @@ mcp-init/
 
 1. Clone this repository:
 ```bash
-git clone <repository-url>
+git clone https://github.com/prashplus/mcp-init.git
 cd mcp-init
 ```
 
 2. Install Python dependencies:
 ```bash
+# Option 1: Use the setup script (recommended)
+python setup.py
+
+# Option 2: Manual installation
 pip install -r requirements.txt
 ```
 
-3. Verify Ollama is running:
+3. Verify installation:
+```bash
+python run_tests.py
+```
+
+4. (Optional) Verify Ollama is running for AI integration:
 ```bash
 # Check if Ollama is accessible
 curl http://localhost:11434/api/tags
@@ -275,8 +288,21 @@ logging.basicConfig(level=logging.DEBUG)
 1. Fork the repository
 2. Create a feature branch
 3. Add your improvements
-4. Test thoroughly
+4. Test thoroughly (CI will run automatically)
 5. Submit a pull request
+
+### Continuous Integration
+
+This repository includes a GitHub Actions CI workflow that:
+- Tests on Python 3.8, 3.9, 3.10, 3.11, and 3.12
+- Runs on Ubuntu, Windows, and macOS
+- Performs syntax checks and linting
+- Tests basic MCP server functionality
+- Validates all Python scripts compile correctly
+
+The CI runs automatically on:
+- Push to `main` or `develop` branches
+- Pull requests to `main`
 
 ## License
 

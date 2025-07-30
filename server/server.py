@@ -175,8 +175,39 @@ class MCPServer:
         elif tool_name == "calculate":
             expression = arguments.get("expression", "")
             try:
-                # Simple evaluation - in production, use a safer parser
-                result = str(eval(expression))
+                # Safe evaluation - only allow basic math operations
+                import ast
+                import operator
+                
+                # Allowed operations for safe math evaluation
+                ops = {
+                    ast.Add: operator.add,
+                    ast.Sub: operator.sub,
+                    ast.Mult: operator.mul,
+                    ast.Div: operator.truediv,
+                    ast.Pow: operator.pow,
+                    ast.BitXor: operator.xor,
+                    ast.USub: operator.neg,
+                }
+                
+                def eval_expr(expr):
+                    """Safely evaluate mathematical expressions"""
+                    return eval_(ast.parse(expr, mode='eval').body)
+                
+                def eval_(node):
+                    """Recursive evaluation of AST nodes"""
+                    if isinstance(node, ast.Num):  # number
+                        return node.n
+                    elif isinstance(node, ast.Constant):  # Python 3.8+
+                        return node.value
+                    elif isinstance(node, ast.BinOp):  # binary operation
+                        return ops[type(node.op)](eval_(node.left), eval_(node.right))
+                    elif isinstance(node, ast.UnaryOp):  # unary operation
+                        return ops[type(node.op)](eval_(node.operand))
+                    else:
+                        raise TypeError(f"Unsupported operation: {type(node)}")
+                
+                result = str(eval_expr(expression))
             except Exception as e:
                 result = f"Error calculating: {str(e)}"
         elif tool_name == "get_time":
